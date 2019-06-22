@@ -1,4 +1,6 @@
 # wiki-page-creator-action
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDecathlon%2Fwiki-page-creator-action.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FDecathlon%2Fwiki-page-creator-action?ref=badge_shield)
+
 The target of this action is to publish Wiki pages using the provided markdown: into the repository, commits or as the result of a previous action.
 
 ## Getting Started
@@ -79,3 +81,6 @@ Then the `wiki-page-creator-action` is taking all the MD files into the `temp_re
 
 # Credits
 The code of this actions began on [mmornati](https://github.com/mmornati) github workspace. 
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FDecathlon%2Fwiki-page-creator-action.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FDecathlon%2Fwiki-page-creator-action?ref=badge_large)
