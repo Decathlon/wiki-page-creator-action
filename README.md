@@ -21,8 +21,8 @@
 - [Credits](#credits)
 
 ## Common usage
-The action require some content _markdown/wiki pages_ that must be generated on a previous step, and located in a specific folder.  
-Then, this action will scan the folder, add each file, and finally publish them onto the wiki.
+The action requires some content _markdown/wiki pages_ that must be generated on a previous step, and located into a specific folder.  
+This action scans the folder, adds its files, and finally publishes them to the wiki.
 
 ## Breaking change
 
@@ -33,7 +33,7 @@ As a consequence, __please use v2.0.0+__ release and note that __all v1.x.x are 
 
 ## Use Github action
 
-__*Please note that this action require your repo to already own at least one page in the wiki section: https://github.com/:yourOrganization/:yourRepository/wiki*__
+__*Please note that this action requires your repo to already own at least one page in the wiki section: https://github.com/:yourOrganization/:yourRepository/wiki*__
 
 ### Settings for v1.0.0+ release (deprecated)
 
@@ -50,7 +50,7 @@ action "wiki-page-creator-action" {
     ACTION_MAIL = "my@mail.com"
     ACTION_NAME = "myusername"
     OWNER = "yourGitHubOrganisation"
-    REPO_NAME = "yourGitHubRepo"
+    REPO_NAME = "yourGitHubRepository"
   }
 }
 ```
@@ -61,10 +61,10 @@ action "wiki-page-creator-action" {
   uses: docker://decathlon/wiki-page-creator-action:2.0.0
   env:
     GH_PAT: ${{ secrets.GH_PAT }}
-    ACTION_MAIL: my@mail.com
-    ACTION_NAME: myusername
+    ACTION_MAIL: youremail@mail.com
+    ACTION_NAME: yourusername
     OWNER: yourGitHubOrganisation
-    REPO_NAME: yourGitHubRepo
+    REPO_NAME: yourGitHubRepository
 ```
 
 ### Environment Variables options
@@ -85,9 +85,10 @@ The following one is the workflow we are using to push the release notes to our 
 
 In this example the workflow is started `on milestone`; the first action is filtering on the `closed` action of the milestone (if milestone is created, renamed, ... the other steps are skipped).
 
-The `create-release-notes-action` is taking care to the markdown file creation (check [here](https://github.com/Decathlon/release-notes-generator-action) if your need more information). The output file is stored into the `temp_release_notes`.
+The `create-release-notes-action` creates the markdown file (check [here](https://github.com/Decathlon/release-notes-generator-action) if your need more information). 
+The output file is stored into the `temp_release_notes`.
 
-Then the `wiki-page-creator-action` is taking all the MD files into the `temp_release_notes` folder (skipping a README.md file if found) and is uploading them to the provided wiki repo.
+The `wiki-page-creator-action` takes all the markdown files from the `temp_release_notes` folder (skipping a README.md file if found) and uploads them to the provided wiki repo.
 
 ### Using v1.0.0+
 ```
@@ -121,7 +122,7 @@ action "Upload Release Notes on Wiki" {
     ACTION_MAIL = "myuser@users.noreply.github.com"
     ACTION_NAME = "myPushingUser"
     OWNER = "yourGitHubOrganisation"
-    REPO_NAME = "yourGitHubRepo"
+    REPO_NAME = "yourGitHubRepository"
     SKIP_MD = "README.md"
     MD_FOLDER = "temp_release_notes"
   }
@@ -156,7 +157,7 @@ jobs:
         GH_PAT: ${{ secrets.GH_PAT }}
         MD_FOLDER: temp_release_notes
         OWNER: yourGitHubOrganisation
-        REPO_NAME: yourGitHubRepo
+        REPO_NAME: yourGitHubRepository
         SKIP_MD: README.md
 ```
 
