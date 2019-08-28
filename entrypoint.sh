@@ -51,7 +51,7 @@ for i in $(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -execdir basename '{
     if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
         cp $MD_FOLDER/$i $TEMP_CLONE_FOLDER
     else
-        echo "Skip $i as it is maching the $SKIP_MD rule"
+        echo "Skip $i as it is matching the $SKIP_MD rule"
     fi
 done
 
