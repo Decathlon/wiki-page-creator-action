@@ -70,7 +70,8 @@ action "wiki-page-creator-action" {
 ### Environment Variables options
 
 To be able to push the new Wiki Page, the action requires some environment variables/secrets:
-* **GH_PAT**: (required) GitHub Private Access Token used for the clone/push operations. The token is used for security reasons, instead of the username/password, and because is the only way to access to repositories for organizations using SSO. To create it follow the [GitHub Documentation](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line).
+* **GH_PAT**: (required) GitHub Private Access Token used for the clone/push operations. The token is used for security reasons, instead of the username/password, and because is the only way to access to repositories for organizations using SSO. You can [click here](https://github.com/settings/tokens/new?scopes=repo&description=wiki%20page%20creator%20token) to generate this token.
+
 * **ACTION_MAIL**: (required) email used to push new wiki pages into the target repository
 * **ACTION_NAME**: (required) username to use in the push command
 * **OWNER**: (required) repository owner name.
