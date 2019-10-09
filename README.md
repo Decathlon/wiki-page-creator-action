@@ -133,17 +133,15 @@ action "Upload Release Notes on Wiki" {
 ### Using v2.0.0+
 
 ```YAML
-on: milestone
+on: 
+  milestone:
+    types: [closed]
 name: Milestone Closure
 jobs:
-  action-filter:
-    runs-on: ubuntu-18.04
+  release-notes:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: action-filter
-      uses: actions/bin/filter@master
-      with:
-        args: action closed
     - name: Create Release Notes
       uses: docker://decathlon/release-notes-generator-action:2.0.0
       env:
