@@ -11,7 +11,7 @@
 
   - [Common usage](#common-usage)
   - [Breaking change](#breaking-change)
-  - [Use Github action](#use-github-action)
+  - [Use GitHub action](#use-github-action)
     - [Settings for v1.0.0+ release (deprecated)](#settings-for-v100-release-deprecated)
     - [Settings for v2.0.0+ release](#settings-for-v200-release)
     - [Environment Variables options](#environment-variables-options)
@@ -31,7 +31,7 @@ The previous syntax will no longer be supported by GitHub on September 30, 2019.
 
 As a consequence, __please use v2.0.0+__ release and note that __all v1.x.x are deprecated__ and will no longer work on September 30, 2019.
 
-## Use Github action
+## Use GitHub action
 
 __*Please note that this action requires your repo to already own at least one page in the wiki section: https://github.com/:yourOrganization/:yourRepository/wiki*__
 
@@ -162,4 +162,4 @@ jobs:
 
 
 # Credits
-The code of this actions began on [mmornati](https://github.com/mmornati) github workspace.
+The code of this actions began on [mmornati](https://github.com/mmornati) GitHub workspace.
