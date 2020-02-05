@@ -10,13 +10,10 @@
 **Table of Contents**
 
   - [Common usage](#common-usage)
-  - [Breaking change](#breaking-change)
   - [Use GitHub action](#use-github-action)
-    - [Settings for v1.0.0+ release (deprecated)](#settings-for-v100-release-deprecated)
     - [Settings for v2.0.0+ release](#settings-for-v200-release)
     - [Environment Variables options](#environment-variables-options)
   - [Full Example (with additional actions to generate content)](#full-example-with-additional-actions-to-generate-content)
-    - [Using v1.0.0+](#using-v100)
     - [Using v2.0.0+](#using-v200)
 - [Credits](#credits)
 
@@ -24,41 +21,15 @@
 The action requires some content _markdown/wiki pages_ that must be generated on a previous step, and located into a specific folder.  
 This action scans the folder, adds its files, and finally publishes them to the wiki.
 
-## Breaking change
-
-Starting from August 2019, GitHub team switch [Actions syntax from HCL to YAML](https://help.github.com/en/articles/migrating-github-actions-from-hcl-syntax-to-yaml-syntax).  
-The previous syntax will no longer be supported by GitHub on September 30, 2019.
-
-As a consequence, __please use v2.0.0+__ release and note that __all v1.x.x are deprecated__ and will no longer work on September 30, 2019.
-
 ## Use GitHub action
 
 __*Please note that this action requires your repo to already own at least one page in the wiki section: https://github.com/:yourOrganization/:yourRepository/wiki*__
 
-### Settings for v1.0.0+ release (deprecated)
-
-To use this action simply add it to your `main.workflow` file.
-
-```
-action "wiki-page-creator-action" {
-  uses = "docker://decathlon/wiki-page-creator-action:1.0.0"
-  needs = ["Create Release Notes"]
-  secrets = [
-    "GH_PAT",
-  ]
-  env = {
-    ACTION_MAIL = "my@mail.com"
-    ACTION_NAME = "myusername"
-    OWNER = "yourGitHubOrganisation"
-    REPO_NAME = "yourGitHubRepository"
-  }
-}
-```
 
 ### Settings for v2.0.0+ release
 ```YAML
 - name: Upload Release Notes to Wiki
-  uses: docker://decathlon/wiki-page-creator-action:2.0.0
+  uses: docker://decathlon/wiki-page-creator-action:2.0.1
   env:
     GH_PAT: ${{ secrets.GH_PAT }}
     ACTION_MAIL: youremail@mail.com
@@ -90,45 +61,6 @@ The `create-release-notes-action` creates the markdown file (check [here](https:
 The output file is stored into the `temp_release_notes`.
 
 The `wiki-page-creator-action` takes all the markdown files from the `temp_release_notes` folder (skipping a README.md file if found) and uploads them to the provided wiki repo.
-
-### Using v1.0.0+
-```
-workflow "Sprint Closure" {
-  on = "milestone"
-  resolves = ["Upload Release Notes on Wiki"]
-}
-
-action "action-filter" {
-  uses = "actions/bin/filter@master"
-  args = "action closed"
-}
-
-action "Create Release Notes" {
-  uses = "docker://decathlon/release-notes-generator-action:1.0.0"
-  secrets = ["GITHUB_TOKEN"]
-  needs = ["action-filter"]
-  env = {
-    USE_MILESTONE_TITLE = "true"
-    OUTPUT_FOLDER = "temp_release_notes"
-  }
-}
-
-action "Upload Release Notes on Wiki" {
-  uses = "docker://decathlon/wiki-page-creator-action:1.0.0"
-  needs = ["Create Release Notes"]
-  secrets = [
-    "GH_PAT",
-  ]
-  env = {
-    ACTION_MAIL = "myuser@users.noreply.github.com"
-    ACTION_NAME = "myPushingUser"
-    OWNER = "yourGitHubOrganisation"
-    REPO_NAME = "yourGitHubRepository"
-    SKIP_MD = "README.md"
-    MD_FOLDER = "temp_release_notes"
-  }
-}
-```
 
 ### Using v2.0.0+
 
