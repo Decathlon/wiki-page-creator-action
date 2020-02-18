@@ -38,6 +38,14 @@ if [ -z "$WIKI_PUSH_MESSAGE" ]; then
   WIKI_PUSH_MESSAGE='Auto Publish new pages'
 fi
 
+if [ -z "$TRANSLATE_UNDERSCORE_TO_SPACE" ]; then
+  echo "Don't translate '_' to space in Markdown's names"
+  TRANSLATE=0
+else
+  echo "Enable translation of '_' to spaces in Markdown's names"
+  TRANSLATE=1
+fi
+
 mkdir $TEMP_CLONE_FOLDER
 cd $TEMP_CLONE_FOLDER
 git init
@@ -47,9 +55,15 @@ git pull https://${GH_PAT}@github.com/$OWNER/$REPO_NAME.wiki.git
 cd ..
 
 for i in $(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -execdir basename '{}' ';'); do
-    echo $i
+    realFileName=${i}
+    if [[ $TRANSLATE -ne 0 ]]; then
+        realFileName=${i//_/ }
+        echo "$i -> $realFileName"
+    else 
+        echo $realFileName
+    fi
     if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
-        cp $MD_FOLDER/$i $TEMP_CLONE_FOLDER
+        cp $MD_FOLDER/$i "$TEMP_CLONE_FOLDER/${realFileName}"
     else
         echo "Skip $i as it matches the $SKIP_MD rule"
     fi
