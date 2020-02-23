@@ -50,6 +50,7 @@ To be able to push the new Wiki Page, the action requires some environment varia
 * **MD_FOLDER**: (optional - default is the current folder) folder to scan for markdown files
 * **SKIP_MD**: (optional - all files will be processed) comma separated list of files to skip during the analysis (files you don't want to publish)
 * **WIKI_PUSH_MESSAGE**: (optional - sample message will use instead) Custom push message for your wiki pages.
+* **TRANSLATE_UNDERSCORE_TO_SPACE** (optional) Will translate the underscore in Markdown's names to spaces in your Wiki (disabled by default)
 
 ## Full Example (with additional actions to generate content)
 
