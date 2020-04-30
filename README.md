@@ -42,6 +42,7 @@ __*Please note that this action requires your repo to already own at least one p
 
 To be able to push the new Wiki Page, the action requires some environment variables/secrets:
 * **GH_PAT**: (required) GitHub Private Access Token used for the clone/push operations. The token is used for security reasons, instead of the username/password, and because is the only way to access to repositories for organizations using SSO. You can [click here](https://github.com/settings/tokens/new?scopes=repo&description=wiki%20page%20creator%20token) to generate this token.
+Copy the secret key of the Token and the secret in Settings -> Secrets -> Add new with name=GH_PAT and value=your_secret_key
 
 * **ACTION_MAIL**: (required) email used to push new wiki pages into the target repository
 * **ACTION_NAME**: (required) username to use in the push command
