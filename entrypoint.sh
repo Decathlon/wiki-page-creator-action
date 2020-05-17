@@ -55,18 +55,19 @@ git pull https://${GH_PAT}@github.com/$OWNER/$REPO_NAME.wiki.git
 cd ..
 
 IFS="|"
-for i in "$(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -printf '%p|' -execdir basename '{}' ';')"; do
-    realFileName=${i}
+for i in $(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -printf '%p|'); do
+		basename_i=`basename ${i}`
+    realFileName=${basename_i}
     if [[ $TRANSLATE -ne 0 ]]; then
-        realFileName=${i//_/ }
-        echo "$i -> $realFileName"
+        realFileName=${basename_ii//_/ }
+        echo "${basename_i} -> ${realFileName}"
     else 
-        echo $realFileName
+        echo ${realFileName}
     fi
-    if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
-        cp "$MD_FOLDER/$i" "$TEMP_CLONE_FOLDER/${realFileName}"
+    if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${basename_i} " ]]; then
+        cp "$i" "$TEMP_CLONE_FOLDER/${realFileName}"
     else
-        echo "Skip $i as it matches the $SKIP_MD rule"
+        echo "Skip ${basename_i} as it matches the $SKIP_MD rule"
     fi
 done
 
