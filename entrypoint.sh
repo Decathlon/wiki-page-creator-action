@@ -56,7 +56,7 @@ cd ..
 
 IFS="|"
 for i in $(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -printf '%p|'); do
-		basename_i=`basename ${i}`
+    basename_i=`basename ${i}`
     realFileName=${basename_i}
     if [[ $TRANSLATE -ne 0 ]]; then
         realFileName=${basename_ii//_/ }
