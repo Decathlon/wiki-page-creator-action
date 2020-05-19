@@ -59,7 +59,7 @@ for i in $(find $MD_FOLDER -maxdepth 1 -type f -name '*.md' -printf '%p|'); do
     basename_i=`basename ${i}`
     realFileName=${basename_i}
     if [[ $TRANSLATE -ne 0 ]]; then
-        realFileName=${basename_ii//_/ }
+        realFileName=${basename_i//_/ }
         echo "${basename_i} -> ${realFileName}"
     else 
         echo ${realFileName}
