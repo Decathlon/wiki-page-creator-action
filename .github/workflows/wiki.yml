@@ -1,0 +1,16 @@
+on: 
+  milestone:
+    types: [closed]
+name: Milestone Closure
+jobs:
+  release-notes:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Upload Release Notes to Wiki
+       uses: docker://decathlon/wiki-page-creator-action:2.0.1
+       env:
+         GH_PAT: ${{ secrets.GH_PAT }}
+         ACTION_MAIL: youremail@mail.com
+         ACTION_NAME: yourusername
+         OWNER: yourGitHubOrganisation
+         REPO_NAME: yourGitHubRepository
