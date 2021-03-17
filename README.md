@@ -29,7 +29,7 @@ __*Please note that this action requires your repo to already own at least one p
 ### Settings for v2.0.0+ release
 ```YAML
 - name: Upload Release Notes to Wiki
-  uses: docker://decathlon/wiki-page-creator-action:2.0.1
+  uses: docker://decathlon/wiki-page-creator-action:latest
   env:
     GH_PAT: ${{ secrets.GH_PAT }}
     ACTION_MAIL: youremail@mail.com
