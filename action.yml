@@ -3,7 +3,7 @@ author: Decathlon <developers@decathlon.com>
 description: This Github action <strong>publish Wiki pages <i>with a provided markdown</i></strong> into the Wiki section of your GitHub repository. This action scans the folder, adds its files, and finally publishes them to the wiki. _That means this action requires some content markdown/wiki pages to be generated on a previous step, and located into a specific folder._
 runs:
   using: 'docker'
-  image: 'docker://decathlon/wiki-page-creator-action:2.0.3'
+  image: 'Dockerfile'
 branding:
   icon: tag
   color: blue

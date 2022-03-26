@@ -46,6 +46,10 @@ else
   TRANSLATE=1
 fi
 
+if [ -z "${GFX_PATH}" ]; then
+  echo "GFX_PATH ENV is missing. Not modifying any image URLs"
+fi
+
 mkdir $TEMP_CLONE_FOLDER
 cd $TEMP_CLONE_FOLDER
 git init
@@ -60,11 +64,14 @@ for i in $FILES; do
     if [[ $TRANSLATE -ne 0 ]]; then
         realFileName=${i//_/ }
         echo "$i -> $realFileName"
-    else 
+    else
         echo $realFileName
     fi
     if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
         cp "$MD_FOLDER/$i" "$TEMP_CLONE_FOLDER/${realFileName}"
+        if [ -n "${GFX_PATH}" ]; then # modify image URLs from relative path to absolute web URL
+            sed -i -E 's<!\[(.*)\]\(('"${GFX_PATH}"'\/.*)\)<!\[\1\]\(https://raw.githubusercontent.com/'"$OWNER"'/'"$REPO_NAME"'/master/'"$MD_FOLDER"'/\2\)<g' "$TEMP_CLONE_FOLDER/${realFileName}"
+        fi
     else
         echo "Skip $i as it matches the $SKIP_MD rule"
     fi

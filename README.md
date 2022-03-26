@@ -52,6 +52,7 @@ Copy the secret key of the Token and the secret in Settings -> Secrets -> Add ne
 * **SKIP_MD**: (optional - all files will be processed) comma separated list of files to skip during the analysis (files you don't want to publish)
 * **WIKI_PUSH_MESSAGE**: (optional - sample message will use instead) Custom push message for your wiki pages.
 * **TRANSLATE_UNDERSCORE_TO_SPACE** (optional) Will translate the underscore in Markdown's names to spaces in your Wiki (disabled by default)
+* **GFX_PATH** (optional - no image support by default) Will modify all image URLs that point to files in the specified directory to absolute web URLs in every copied Markdown file for automatic image support.
 
 ## Full Example (with additional actions to generate content)
 
@@ -59,7 +60,7 @@ The following one is the workflow we are using to push the release notes to our 
 
 In this example the workflow is started `on milestone`; the first action is filtering on the `closed` action of the milestone (if milestone is created, renamed, ... the other steps are skipped).
 
-The `create-release-notes-action` creates the markdown file (check [here](https://github.com/Decathlon/release-notes-generator-action) if your need more information). 
+The `create-release-notes-action` creates the markdown file (check [here](https://github.com/Decathlon/release-notes-generator-action) if your need more information).
 The output file is stored into the `temp_release_notes`.
 
 The `wiki-page-creator-action` takes all the markdown files from the `temp_release_notes` folder (skipping a README.md file if found) and uploads them to the provided wiki repo.
@@ -67,7 +68,7 @@ The `wiki-page-creator-action` takes all the markdown files from the `temp_relea
 ### Using v2.0.0+
 
 ```YAML
-on: 
+on:
   milestone:
     types: [closed]
 name: Milestone Closure
@@ -92,6 +93,7 @@ jobs:
         OWNER: yourGitHubOrganisation
         REPO_NAME: yourGitHubRepository
         SKIP_MD: README.md
+        GFX_PATH: gfx
 ```
 
 
