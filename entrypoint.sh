@@ -46,6 +46,14 @@ else
   TRANSLATE=1
 fi
 
+if [ -z "$CAPITALIZE_FIRST_LETTER" ]; then
+  echo "Don't capitalize first letter in Markdown's names"
+  CAPITALIZE=0
+else
+  echo "Capitalize first letter in Markdown's names"
+  CAPITALIZE=1
+fi
+
 mkdir $TEMP_CLONE_FOLDER
 cd $TEMP_CLONE_FOLDER
 git init
@@ -59,8 +67,13 @@ for i in $FILES; do
     realFileName=${i}
     if [[ $TRANSLATE -ne 0 ]]; then
         realFileName=${i//_/ }
+    fi
+    if [[ $CAPITALIZE -ne 0 ]]; then
+        realFileName=${realFileName^}
+    fi
+    if [ "$realFileName" = "$i" ]
         echo "$i -> $realFileName"
-    else 
+    else
         echo $realFileName
     fi
     if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
