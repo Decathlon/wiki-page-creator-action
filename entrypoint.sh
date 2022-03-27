@@ -71,7 +71,7 @@ for i in $FILES; do
     if [[ $CAPITALIZE -ne 0 ]]; then
         realFileName=${realFileName^}
     fi
-    if [ "$realFileName" = "$i" ]
+    if [ "$realFileName" = "$i" ]; then
         echo "$i -> $realFileName"
     else
         echo $realFileName
