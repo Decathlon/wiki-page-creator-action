@@ -72,9 +72,9 @@ for i in $FILES; do
         realFileName=${realFileName^}
     fi
     if [ "$realFileName" = "$i" ]; then
-        echo "$i -> $realFileName"
-    else
         echo $realFileName
+    else
+        echo "$i -> $realFileName"
     fi
     if [[ ! " ${DOC_TO_SKIP[@]} " =~ " ${i} " ]]; then
         cp "$MD_FOLDER/$i" "$TEMP_CLONE_FOLDER/${realFileName}"
