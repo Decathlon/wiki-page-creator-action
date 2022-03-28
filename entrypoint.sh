@@ -73,7 +73,7 @@ for i in $FILES; do
             # standard Markdown format
             sed -i -E 's<!\[(.*)\]\(('"${GFX_PATH}"'\/.*?)\)<!\[\1\]\(https://raw.githubusercontent.com/'"$OWNER"'/'"$REPO_NAME"'/master/'"$MD_FOLDER"'/\2\)<g' "$TEMP_CLONE_FOLDER/${realFileName}"
             # HTML format
-            sed -i -E 's;<img src="'"${GFX_PATH}"'\/(.*?)>;<img src="https://raw.githubusercontent.com/'"$OWNER"'/'"$REPO_NAME"'/master/'"$MD_FOLDER"'/\1>;g' "$TEMP_CLONE_FOLDER/${realFileName}"
+            sed -i -E 's;<img src="('"${GFX_PATH}"'\/.*?)>;<img src="https://raw.githubusercontent.com/'"$OWNER"'/'"$REPO_NAME"'/master/'"$MD_FOLDER"'/\1>;g' "$TEMP_CLONE_FOLDER/${realFileName}"
         fi
     else
         echo "Skip $i as it matches the $SKIP_MD rule"
